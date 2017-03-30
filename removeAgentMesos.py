@@ -6,7 +6,6 @@ import sys
 
 maintenance_endpoint = "/maintenance/schedule"
 machine_endpoint = "/machine/"
-json_path = './JSON/maintenance.json'
 
 
 def parse_args():
@@ -14,6 +13,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Mesos Maintenance Script')
     parser.add_argument('--url', dest='url', type=str, help='Marathon URL (http://marathon.example.com)')
     parser.add_argument('--hosts', dest='hosts', type=str, help='Hosts going to go for maintenance')
+    parser.add_argument('--json', dest='json', type=str, help='json path')
     args = parser.parse_args()
     return args
 
@@ -22,6 +22,7 @@ def main():
     args = parse_args()
     maintenance_hosts = args.hosts.split(',')
     cluster_endpoint = args.url
+    json_path = args.json
     # marathonUrl = "https://dcos-cus-prod.customers.biocatch.com/mesos"
 
     with open(json_path) as data_file:
