@@ -46,7 +46,6 @@ def main():
     except requests.exceptions.RequestException as e:
         print(e)
         sys.exit(1)
-    print response.status_code
 
     time.sleep(3)
 
