@@ -18,7 +18,7 @@ import time
 
 import requests
 
-from Utils.Python.Modules.DCOSModules import check_deploy_status
+from DCOSModules import check_deploy_status
 
 apps_endpoint = "/v2/apps"
 tasks_endpoint = "/v2/tasks"
