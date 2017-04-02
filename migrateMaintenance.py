@@ -12,15 +12,19 @@ Example Usage:
 $ python migrateMaintenance.py --url http://marathon.example.com --hosts 172.31.37.92,172.31.35.101
 """
 
-import sys
-import json
-import time
 import argparse
+import sys
+import time
+
 import requests
-from DCOSModules import check_deploy_status
+
+from Modules.DCOSModules import check_deploy_status
+
 apps_endpoint = "/v2/apps"
 tasks_endpoint = "/v2/tasks"
 deployment_endpoint = "/v2/deployments"
+maintenance_endpoint = "/maintenance/schedule"
+machine_endpoint = "/machine/"
 
 
 def parse_args():
@@ -114,7 +118,7 @@ def redeploy_with_constraints(marathon_endpoint, appId, hosts):
     payload["constraints"] = constraints
     redeploy_url = marathon_endpoint + apps_endpoint + appId
     try:
-        response = requests.put(redeploy_url, data=json.dumps(payload))
+        response = requests.put(redeploy_url, data=Utils.Python.JSON.dumps(payload))
         print(response.json())
         if response.status_code == 200:
             deploymentId = response.json()['deploymentId']
