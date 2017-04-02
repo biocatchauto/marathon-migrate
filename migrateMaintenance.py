@@ -15,7 +15,7 @@ $ python migrateMaintenance.py --url http://marathon.example.com --hosts 172.31.
 import argparse
 import sys
 import time
-
+import json
 import requests
 
 from DCOSModules import check_deploy_status
