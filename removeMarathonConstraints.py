@@ -42,7 +42,7 @@ def main():
                         new_constraints.append(constraint)
                 app['constraints'] = new_constraints
                 try:
-                    response = requests.put(url=app_url, data=Utils.Python.JSON.dumps(app), headers=headers)
+                    response = requests.put(url=app_url, data=json.dumps(app), headers=headers)
                     print(response.json())
                     if response.status_code == 200:
                         print ("constraints removed from: " + app['id'])

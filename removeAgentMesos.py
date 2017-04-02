@@ -26,7 +26,7 @@ def main():
     # marathonUrl = "https://dcos-cus-prod.customers.biocatch.com/mesos"
 
     with open(json_path) as data_file:
-        data = Utils.Python.JSON.load(data_file)
+        data = json.load(data_file)
 
     windows = data['windows']
     hosts = windows[0]['machine_ids']
@@ -40,7 +40,7 @@ def main():
 
     maintenance_url = cluster_endpoint + maintenance_endpoint
     try:
-        response = requests.post(url=maintenance_url, data=Utils.Python.JSON.dumps(data))
+        response = requests.post(url=maintenance_url, data=json.dumps(data))
         if response.status_code == 200:
             print("maintenance window set for hosts")
     except requests.exceptions.RequestException as e:
@@ -51,7 +51,7 @@ def main():
 
     machine_down_url = cluster_endpoint + machine_endpoint + "down"
     try:
-        response = requests.post(url=machine_down_url, data=Utils.Python.JSON.dumps(hosts))
+        response = requests.post(url=machine_down_url, data=json.dumps(hosts))
         if response.status_code == 200:
             print("Removed hosts from mesos")
     except requests.exceptions.RequestException as e:
@@ -61,7 +61,7 @@ def main():
     time.sleep(2)
     machine_up_url = cluster_endpoint + machine_endpoint + "up"
     try:
-        response = requests.post(url=machine_up_url, data=Utils.Python.JSON.dumps(hosts))
+        response = requests.post(url=machine_up_url, data=json.dumps(hosts))
         if response.status_code == 200:
             print("maintenance window cleared")
     except requests.exceptions.RequestException as e:
